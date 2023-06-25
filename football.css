@@ -1,15 +1,222 @@
 body {
-    background-color: rgb(210, 236, 210);
-    padding: 10px;
-    margin: 10px;
+    background-color: #006633;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    height: 110vh;
 }
 
 * {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 .container {
-    background-color: rgb(28, 139, 102);
-    position: relative;
+    background-color: #006633;
+    position: absolute;
     height: 100%;
+    width: 100%;
+}
+
+.goal {
+    height: 120px;
+    width: 230px;
+    border: 6px solid #FFFFFF;
+    border-top: none;
+    margin: auto;
+    border-radius: 0 0 6px 6px;
+    position: relative;
+}
+
+.inside_goal {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    border: 5px solid #FFFFFF;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+}
+
+.circle {
+    position: absolute;
+    width: 100px;
+    height: 60px;
+    border-radius: 50%;
+    left: 50%;
+    top: 75%;
+    border: 5px solid #FFFFFF;
+    transform: translateX(-50%);
+}
+
+.hide-circle {
+    position: absolute;
+    width: 100px;
+    height: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 54px;
+    background-color: #006633;
+}
+
+.start-circle {
+    position: absolute;
+    top: 80%;
+    width: 100%;
+    height: 5px;
+    background-color: #FFFFFF;
+}
+
+.circle_debut {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    left: 50%;
+    top: -45px;
+    transform: translateX(-50%);
+    border: 5px solid #FFFFFF;
+}
+
+.circle_debut1 {
+    position: absolute;
+    top: 5px;
+    width: 100px;
+    height: 50px;
+    transform: translateX(-50%);
+    left: 50%;
+    background-color: #006633;
+}
+
+.lineup {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 20%;
+}
+
+.kepper {
+    position: absolute;
+    width: 100%;
+    height: 30%;
+}
+
+.playerInformation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.kepper .playerInformation {
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    top: 20px;
+}
+
+.name {
+    color: rgb(33, 22, 22);
+    margin-top: 3px;
+    font-size: 18px;
+}
+
+.name .number {
+    margin-right: 5px;
+    color: rgb(43, 40, 45);
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 5px;
+    object-fit: cover;
+}
+
+.normal,
+.abdo {
+    filter: none;
+    -webkit-filter: none;
+    object-position: 50% 40%;
+}
+
+.defense {
+    position: absolute;
+    width: 100%;
+    top: 33%;
+    height: 20%;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mid {
+    position: absolute;
+    width: 100%;
+    top: 57%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.mid .playerInformation {
+    margin: 12px;
+}
+
+.attack {
+    position: absolute;
+    width: 100%;
+    top: 80%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+.bench {
+    position: absolute;
+    top: 80%;
+    width: 100%;
+    padding: 10px;
+}
+
+h3 {
+    color: aliceblue;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.bench-players {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.change {
+    position: absolute;
+    z-index: 100;
+    left: -5px;
+    opacity: 0;
+    transition: .5s;
+}
+
+.change img {
+    width: 20px;
+    height: 20px;
+    filter: none;
+    -webkit-filter: none;
+}
+
+.picture {
+    position: relative;
+    cursor: pointer;
+}
+
+.picture:hover .change {
+    opacity: 1;
+    transition: .5s;
 }
