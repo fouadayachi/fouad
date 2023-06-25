@@ -106,39 +106,54 @@
         </div>
     </div>
     <script>
-        const images = document.querySelectorAll('.players');
+      let playerImages = document.querySelectorAll('.players');
+        let selectedPlayer = null;
 
-        images.forEach((img) => {
-            img.addEventListener('dragstart', dragElement);
-            img.addEventListener('dragover', (e) => e.preventDefault());
-            img.addEventListener('drop', swapPlayers);
-            img.addEventListener('touchstart', dragElement);
-  img.addEventListener('touchmove', (e) => e.preventDefault());
-  img.addEventListener('touchend', swapPlayers);
+        playerImages.forEach(playerImage => {
+            playerImage.addEventListener('click', () => {
+                let playerInfo = playerImage.parentElement.parentElement;
+
+                if (selectedPlayer === null) {
+                    selectedPlayer = playerInfo;
+                    playerInfo.classList.add('selected');
+                    addGreenBorderToOthers(selectedPlayer);
+                } else {
+                    swapPlayerInfo(selectedPlayer, playerInfo);
+                    removeGreenBorderFromOthers();
+                    selectedPlayer.classList.remove('selected');
+                    selectedPlayer = null;
+                }
+            });
         });
 
-        let draggedElement;
-
-        function dragElement(e) {
-            e.dataTransfer.setData('text/plain', ''); // Required for Firefox compatibility
-            draggedElement = e.target;
+        function addGreenBorderToOthers(selectedPlayer) {
+            playerImages.forEach(playerImage => {
+                let playerInfo = playerImage.parentElement.parentElement;
+                if (playerInfo !== selectedPlayer) {
+                    playerInfo.classList.add('other-players');
+                }
+            });
         }
 
-        function swapPlayers(e) {
-            e.preventDefault();
-            const targetElement = e.target;
+        function removeGreenBorderFromOthers() {
+            let otherPlayers = document.querySelectorAll('.other-players');
+            otherPlayers.forEach(player => {
+                player.classList.remove('other-players');
+            });
+        }
 
-            // Swap image sources
-            const draggedSrc = draggedElement.src;
-            const targetSrc = targetElement.src;
-            draggedElement.src = targetSrc;
-            targetElement.src = draggedSrc;
+        function swapPlayerInfo(player1, player2) {
+            // Swap player images
+            let player1Image = player1.querySelector('.players').src;
+            let player2Image = player2.querySelector('.players').src;
+            player1.querySelector('.players').src = player2Image;
+            player2.querySelector('.players').src = player1Image;
 
-            // Swap player names
-            const draggedName = draggedElement.parentNode.nextElementSibling.innerHTML;
-            const targetName = targetElement.parentNode.nextElementSibling.innerHTML;
-            draggedElement.parentNode.nextElementSibling.innerHTML = targetName;
-            targetElement.parentNode.nextElementSibling.innerHTML = draggedName;
+            // Swap player names and numbers
+            let player1Name = player1.querySelector('.name').innerHTML;
+            let player2Name = player2.querySelector('.name').innerHTML;
+            player1.querySelector('.name').innerHTML = player2Name;
+            player2.querySelector('.name').innerHTML = player1Name;
         }
     </script>
 </body>
