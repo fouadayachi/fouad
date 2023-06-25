@@ -106,38 +106,69 @@
         </div>
     </div>
     <script>
-        const images = document.querySelectorAll('.players');
+  const images = document.querySelectorAll('.players');
 
-        images.forEach((img) => {
-            img.addEventListener('dragstart', dragElement);
-            img.addEventListener('dragover', (e) => e.preventDefault());
-            img.addEventListener('drop', swapPlayers);
-        });
+  images.forEach((img) => {
+    img.addEventListener('dragstart', dragElement);
+    img.addEventListener('dragover', (e) => e.preventDefault());
+    img.addEventListener('drop', swapPlayers);
 
-        let draggedElement;
+    // Add touch event listeners
+    img.addEventListener('touchstart', handleTouchStart, { passive: false });
+    img.addEventListener('touchmove', handleTouchMove, { passive: false });
+    img.addEventListener('touchend', handleDragEnd);
+  });
 
-        function dragElement(e) {
-            e.dataTransfer.setData('text/plain', ''); // Required for Firefox compatibility
-            draggedElement = e.target;
-        }
+  let draggedElement;
 
-        function swapPlayers(e) {
-            e.preventDefault();
-            const targetElement = e.target;
+  function dragElement(e) {
+    e.dataTransfer.setData('text/plain', ''); // Required for Firefox compatibility
+    draggedElement = e.target;
+    e.currentTarget.style.opacity = '0.5';
+  }
 
-            // Swap image sources
-            const draggedSrc = draggedElement.src;
-            const targetSrc = targetElement.src;
-            draggedElement.src = targetSrc;
-            targetElement.src = draggedSrc;
+  function swapPlayers(e) {
+    e.preventDefault();
+    const targetElement = e.target;
 
-            // Swap player names
-            const draggedName = draggedElement.parentNode.nextElementSibling.innerHTML;
-            const targetName = targetElement.parentNode.nextElementSibling.innerHTML;
-            draggedElement.parentNode.nextElementSibling.innerHTML = targetName;
-            targetElement.parentNode.nextElementSibling.innerHTML = draggedName;
-        }
-    </script>
+    // Swap image sources
+    const draggedSrc = draggedElement.src;
+    const targetSrc = targetElement.src;
+    draggedElement.src = targetSrc;
+    targetElement.src = draggedSrc;
+
+    // Swap player names
+    const draggedName = draggedElement.parentNode.nextElementSibling.innerHTML;
+    const targetName = targetElement.parentNode.nextElementSibling.innerHTML;
+    draggedElement.parentNode.nextElementSibling.innerHTML = targetName;
+    targetElement.parentNode.nextElementSibling.innerHTML = draggedName;
+
+    // Reset opacity
+    draggedElement.style.opacity = '1';
+  }
+
+  // Touch event handlers
+  function handleTouchStart(event) {
+    const touch = event.touches[0];
+    event.dataTransfer.setData('text/plain', ''); // Required for Firefox compatibility
+    draggedElement = event.target;
+    event.currentTarget.style.opacity = '0.5';
+    event.clientX = touch.clientX;
+    event.clientY = touch.clientY;
+  }
+
+  function handleTouchMove(event) {
+    if (event.touches.length > 1) return;
+    event.preventDefault();
+    event.clientX = event.touches[0].clientX;
+    event.clientY = event.touches[0].clientY;
+    handleDrag(event);
+  }
+
+  function handleDragEnd(event) {
+    event.currentTarget.style.opacity = '1';
+  }
+</script>
 </body>
 
 </html>
