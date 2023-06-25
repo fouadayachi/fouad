@@ -93,31 +93,57 @@ body {
     width: 100%;
     top: 0;
     bottom: 20%;
-}
-
-.kepper {
-    position: absolute;
-    width: 100%;
-    height: 30%;
+    align-content: space-evenly;
+    display: grid;
+    grid-template-areas: 
+    "player1 player1 player1"
+    "player2 player3 player4"
+    "player5 player5 player5"
+    "player6 . player7";
 }
 
 .playerInformation {
     display: flex;
-    flex-direction: column;
+    cursor: pointer;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    justify-self: center;
     z-index: 99;
     padding: 7px;
+    flex-direction: column;
 }
-
-.kepper .playerInformation {
-    position: absolute;
-    transform: translateX(-50%);
-    left: 50%;
-    top: 20px;
+.lineup .playerInformation:nth-child(1){
+    /* background-color: red; */
+    display: flex;
+    grid-area: player1;
 }
-
+.lineup .playerInformation:nth-child(2){
+    /* background-color: red; */
+    grid-area:player2;
+}
+.lineup .playerInformation:nth-child(3){
+    /* background-color: red; */
+    /* margin-left: -10px; */
+    grid-area: player3;
+}
+.lineup .playerInformation:nth-child(4){
+    /* background-color: red; */
+ 
+    grid-area: player4;
+}
+.lineup .playerInformation:nth-child(5){
+    grid-area: player5;
+}
+.lineup .playerInformation:nth-child(6){
+    /* background-color: red; */
+    justify-self: end;
+    grid-area: player6;
+}
+.lineup .playerInformation:nth-child(7){
+    /* background-color: red; */
+    justify-self: start;
+    grid-area: player7;
+}
 .name {
     color: rgb(33, 22, 22);
     margin-top: 3px;
@@ -135,6 +161,7 @@ img {
     border-radius: 50%;
     margin-left: 5px;
     object-fit: cover;
+    /* box-sizing: content-box; */
 }
 
 .normal,
@@ -142,36 +169,6 @@ img {
     filter: none;
     -webkit-filter: none;
     object-position: 50% 40%;
-}
-
-.defense {
-    position: absolute;
-    width: 100%;
-    top: 33%;
-    height: 20%;
-    /* background-color: aqua; */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.mid {
-    position: absolute;
-    width: 100%;
-    top: 57%;
-    height: 20%;
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-}
-.attack {
-    position: absolute;
-    width: 100%;
-    top: 80%;
-    height: 20%;
-    display: flex;
-    justify-content: center;
-    margin-top: 6px;
 }
 
 .bench {
@@ -221,9 +218,28 @@ h3 {
 
 .selected {
     border: 3px solid red;
-    border-radius: 30%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
 .other-players{
     border: 3px solid rgb(74, 184, 74);
-    border-radius: 30%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.formation{
+    z-index: 1000;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+select{
+    align-items: center;
+    padding: 0 15px;
+    outline: none;
 }
