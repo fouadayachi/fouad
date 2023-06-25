@@ -21,58 +21,123 @@
         </div>
         <div class="lineup">
             <div class="kepper">
-                <div class="playerInformation">
+                <div class="playerInformation" id="player1">
                     <div class="picture">
-                        <img src="player.png" alt="player">
+                        <span class="change"><img src="substitution.png" alt=""></span>
+                        <img src="player.png" class="players" alt="player" draggable="true">
                     </div>
                     <div class="name"><span class="number">1</span>kepper</div>
                 </div>
             </div>
             <div class="defense">
-                <div class="playerInformation">
+                <div class="playerInformation" id="player2">
                     <div class="picture">
-                        <img src="player.png" alt="player">
+                        <span class="change"><img src="substitution.png" alt=""></span>
+                        <img src="player.png" class="players" alt="player" draggable="true">
                     </div>
                     <div class="name"><span class="number">2</span>A.Azouz</div>
                 </div>
-                <div class="playerInformation">
+                <div class="playerInformation" id="player3">
                     <div class="picture">
-                        <img src="player.png" alt="player">
+                        <span class="change"><img src="substitution.png" alt=""></span>
+                        <img src="player.png" class="players" alt="player" draggable="true">
                     </div>
                     <div class="name"><span class="number">5</span>L.Samir</div>
                 </div>
-                <div class="playerInformation">
+                <div class="playerInformation" id="player4">
                     <div class="picture">
-                        <img src="photo.jpg" alt="player">
+                        <span class="change"><img src="substitution.png" alt=""></span>
+                        <img src="fouad.jpg" alt="player" draggable="true" class="normal players">
                     </div>
                     <div class="name"><span class="number">3</span>A.Fouad</div>
                 </div>
             </div>
             <div class="mid">
-                <div class="playerInformation">
+                <div class="playerInformation" id="player5">
                     <div class="picture">
-                        <img src="player.png" alt="player">
+                        <span class="change"><img src="substitution.png" alt=""></span>
+                        <img src="abdellah1.jpg" alt="player" draggable="true" class="abdo players">
                     </div>
-                    <div class="name"><span class="number">6</span>T.Abedllah</div>
+                    <div class="name"><span class="number">10</span>T.Abedllah</div>
                 </div>
-                <div class="playerInformation">
+                <div class="playerInformation" id="player6">
                     <div class="picture">
-                        <img src="player.png" alt="player">
+                        <span class="change"><img src="substitution.png" alt=""></span>
+                        <img src="player.png" class="players" alt="player" draggable="true">
                     </div>
-                    <div class="name"><span class="number">10</span>G.Youcef</div>
+                    <div class="name"><span class="number">6</span>G.Youcef</div>
                 </div>
             </div>
             <div class="attack">
-                <div class="playerInformation">
+                <div class="playerInformation" id="player7">
                     <div class="picture">
-                        <img src="player.png" alt="player">
+                        <span class="change"><img src="substitution.png" alt=""></span>
+                        <img src="player.png" class="players" alt="player" draggable="true">
                     </div>
                     <div class="name"><span class="number">11</span>A.Sidahmed</div>
                 </div>
             </div>
         </div>
-
     </div>
+    <div class="bench">
+        <h3>bench : </h3>
+        <div class="bench-players">
+            <div class="playerInformation" id="player8">
+                <div class="picture">
+                    <span class="change"><img src="substitution.png" alt=""></span>
+                    <img src="player.png" class="players" alt="player" draggable="true">
+                </div>
+                <div class="name"><span class="number">7</span>D.Mohammed</div>
+            </div>
+            <div class="playerInformation" id="player9">
+                <div class="picture">
+                    <span class="change"><img src="substitution.png" alt=""></span>
+                    <img src="player.png" class="players" alt="player" draggable="true">
+                </div>
+                <div class="name"><span class="number">8</span>Mohammed</div>
+            </div>
+            <div class="playerInformation" id="player10">
+                <div class="picture">
+                    <span class="change"><img src="substitution.png" alt=""></span>
+                    <img src="player.png" class="players" alt="player" draggable="true">
+                </div>
+                <div class="name"><span class="number">14</span>Zaki</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const images = document.querySelectorAll('.players');
+
+        images.forEach((img) => {
+            img.addEventListener('dragstart', dragElement);
+            img.addEventListener('dragover', (e) => e.preventDefault());
+            img.addEventListener('drop', swapPlayers);
+        });
+
+        let draggedElement;
+
+        function dragElement(e) {
+            e.dataTransfer.setData('text/plain', ''); // Required for Firefox compatibility
+            draggedElement = e.target;
+        }
+
+        function swapPlayers(e) {
+            e.preventDefault();
+            const targetElement = e.target;
+
+            // Swap image sources
+            const draggedSrc = draggedElement.src;
+            const targetSrc = targetElement.src;
+            draggedElement.src = targetSrc;
+            targetElement.src = draggedSrc;
+
+            // Swap player names
+            const draggedName = draggedElement.parentNode.nextElementSibling.innerHTML;
+            const targetName = targetElement.parentNode.nextElementSibling.innerHTML;
+            draggedElement.parentNode.nextElementSibling.innerHTML = targetName;
+            targetElement.parentNode.nextElementSibling.innerHTML = draggedName;
+        }
+    </script>
 </body>
 
 </html>
