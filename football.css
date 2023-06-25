@@ -19,7 +19,7 @@ body {
 
 .goal {
     height: 120px;
-    width: 230px;
+    width: 60%;
     border: 6px solid #FFFFFF;
     border-top: none;
     margin: auto;
@@ -29,7 +29,7 @@ body {
 
 .inside_goal {
     position: absolute;
-    width: 100px;
+    width: 40%;
     height: 50px;
     border: 5px solid #FFFFFF;
     left: 50%;
@@ -107,6 +107,8 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    z-index: 99;
+    padding: 7px;
 }
 
 .kepper .playerInformation {
@@ -160,12 +162,8 @@ img {
     height: 20%;
     display: flex;
     justify-content: center;
+    gap: 50px;
 }
-
-.mid .playerInformation {
-    margin: 12px;
-}
-
 .attack {
     position: absolute;
     width: 100%;
@@ -219,4 +217,13 @@ h3 {
 .picture:hover .change {
     opacity: 1;
     transition: .5s;
+}
+
+.selected {
+    border: 3px solid red;
+    border-radius: 30%;
+}
+.other-players{
+    border: 3px solid rgb(74, 184, 74);
+    border-radius: 30%;
 }
