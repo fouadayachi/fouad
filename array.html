@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="football.css">
+    <script src="https://unpkg.com/mobile-drag-drop"></script>
+
     <title>Document</title>
 </head>
 
@@ -106,6 +108,9 @@
         </div>
     </div>
     <script>
+   // Add this line at the beginning of your script
+  mobileDragDrop.polyfill();
+     
   const images = document.querySelectorAll('.players');
 
   images.forEach((img) => {
