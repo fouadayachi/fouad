@@ -219,18 +219,32 @@ function swapPlayerInfo(player1, player2) {
         }
           document.getElementById('captureButton').addEventListener('click', captureScreenshot);
 
-        function captureScreenshot() {
-            html2canvas(document.body).then(function(canvas) {
-                var imgString = canvas.toDataURL("image/png");
-                
-                // Create a temporary anchor element
-                var tempLink = document.createElement('a');
-                tempLink.href = imgString;
-                tempLink.download = 'screenshot.png';
-                
-                // Trigger a click event on the temporary anchor element
-                tempLink.click();
-            });
+async function captureScreenshot() {
+            try {
+                const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                video.onloadedmetadata = () => {
+                    video.width = stream.getVideoTracks()[0].getSettings().width;
+                    video.height = stream.getVideoTracks()[0].getSettings().height;
+                    video.play().then(() => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = video.width;
+                        canvas.height = video.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(video, 0, 0, video.width, video.height);
+                        canvas.toBlob(blob => {
+                            const tempLink = document.createElement('a');
+                            tempLink.href = URL.createObjectURL(blob);
+                            tempLink.download = 'screenshot.png';
+                            tempLink.click();
+                            stream.getTracks().forEach(track => track.stop());
+                        }, 'image/png');
+                    });
+                };
+            } catch (error) {
+                console.error('Error capturing screenshot:', error);
+            }
         }
     </script>
 </body>
