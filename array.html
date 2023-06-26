@@ -84,6 +84,7 @@
             <option value="2-1-3">2-1-3</option>
         </select>
     </div>
+    <button id="captureButton">Take Screenshot</button>
     <div class="bench">
         <h3>bench : </h3>
         <div class="bench-players">
@@ -117,6 +118,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script>
 let playerImages = document.querySelectorAll('.players');
 let selectedPlayerImage = null;
@@ -214,6 +216,21 @@ function swapPlayerInfo(player1, player2) {
                 player6.style.justifySelf = "center";
                 player7.style.justifySelf = "center";
             }
+        }
+          document.getElementById('captureButton').addEventListener('click', captureScreenshot);
+
+        function captureScreenshot() {
+            html2canvas(document.body).then(function(canvas) {
+                var imgString = canvas.toDataURL("image/png");
+                
+                // Create a temporary anchor element
+                var tempLink = document.createElement('a');
+                tempLink.href = imgString;
+                tempLink.download = 'screenshot.png';
+                
+                // Trigger a click event on the temporary anchor element
+                tempLink.click();
+            });
         }
     </script>
 </body>
