@@ -269,17 +269,10 @@ select {
     visibility: hidden;
     transition: .8s;
     transform: scale(.2);
-    -webkit-transform: scale(.2);
-    -moz-transform: scale(.2);
-    -ms-transform: scale(.2);
-    -o-transform: scale(.2);
-    -webkit-transition: .8s;
-    -moz-transition: .8s;
-    -ms-transition: .8s;
-    -o-transition: .8s;
 }
 .info{
-    height: 27%;
+    height: max-content;
+    padding: 5px;
     background-color: #212529;
     border-radius: 15px 15px 0 0;
     border-bottom: 2px solid #1c1e20;
@@ -297,6 +290,7 @@ select {
 .position{
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 .player-position,.player-age{
     display: flex;
